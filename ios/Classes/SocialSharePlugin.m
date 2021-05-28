@@ -138,6 +138,7 @@
             //check if it contains a link
             if ( [ [url absoluteString]  length] == 0 ) {
                 NSString *urlSchemeTwitter = [NSString stringWithFormat:@"twitter://post?message=%@",captionText];
+                urlSchemeTwitter = [urlSchemeTwitter stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                 NSURL *urlSchemeSend = [NSURL URLWithString:urlSchemeTwitter];
                 if (@available(iOS 10.0, *)) {
                     [[UIApplication sharedApplication] openURL:urlSchemeSend options:@{} completionHandler:nil];
@@ -154,6 +155,7 @@
                     NSString *urlWithLink = [urlSchemeSms stringByAppendingString:[url absoluteString]];
 
                     //final urlscheme
+                    urlWithLink = [urlWithLink stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                     NSURL *urlSchemeMsg = [NSURL URLWithString:urlWithLink];
                     if (@available(iOS 10.0, *)) {
                         [[UIApplication sharedApplication] openURL:urlSchemeMsg options:@{} completionHandler:nil];
@@ -168,6 +170,7 @@
                     NSString *urlWithLink = [urlSchemeSms stringByAppendingString:[url absoluteString]];
                     NSString *finalurl = [urlWithLink stringByAppendingString:trailingText];
                     //final urlscheme
+                    finalurl = [finalurl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                     NSURL *urlSchemeMsg = [NSURL URLWithString:finalurl];
                     if (@available(iOS 10.0, *)) {
                         [[UIApplication sharedApplication] openURL:urlSchemeMsg options:@{} completionHandler:nil];
